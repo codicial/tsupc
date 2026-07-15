@@ -85,10 +85,7 @@ describe("@tsupc/timing packaging", () => {
     try {
       writeFileSync(
         path.join(fixtureDir, "index.ts"),
-        [
-          "import * as test from '@tsupc/timing';",
-          "void test;",
-        ].join("\n"),
+        ["import * as test from '@tsupc/timing';", "void test;"].join("\n"),
       );
 
       writeFileSync(

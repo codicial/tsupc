@@ -1,17 +1,20 @@
 {
   "name": "@tsupc/random",
+  "version": "0.0.1",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codicial/tsupc.git",
     "directory": "packages/random"
   },
-  "license": "MIT",
-  "version": "0.0.1",
-  "type": "module",
-  "sideEffects": false,
   "files": [
     "dist"
   ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -19,9 +22,6 @@
       "require": "./dist/index.cjs"
     }
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
