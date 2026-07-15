@@ -34,7 +34,8 @@ All published code is reviewed, edited, and finalized by the author.
 
 Current workspace packages:
 
-- TODO: Add Packages
+- `@tsupc/random` - deterministic random utilities and helpers
+- `@tsupc/timing` - timing helpers such as `debounce`
 
 ## Getting Started
 
@@ -114,6 +115,11 @@ The default package shape publishes:
 - `dist/index.mjs`
 - `dist/index.cjs`
 - `dist/index.d.ts`
+
+## Attribution
+
+- `@tsupc/random` uses FNV-1a hashing for seed initialization and MMIX linear congruential generator constants for state advancement.
+- `@tsupc/timing` currently provides a small debounce utility implemented for this workspace.
 
 ## Versioning
 

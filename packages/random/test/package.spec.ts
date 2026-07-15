@@ -27,8 +27,9 @@ describe("@tsupc/random packaging", () => {
       "--input-type=module",
       "--eval",
       [
-        "import * as test from '@tsupc/random';",
-        "if (test === undefined) throw new Error('Invalid ESM export.');",
+        "import { Random } from '@tsupc/random';",
+        "const random = new Random('seed');",
+        "if (typeof random.nextUint32() !== 'number') throw new Error('Invalid ESM export.');",
       ].join(" "),
     ]);
   });
@@ -37,8 +38,9 @@ describe("@tsupc/random packaging", () => {
     run(process.execPath, [
       "--eval",
       [
-        "const test = require('@tsupc/random');",
-        "if (test === undefined) throw new Error('Invalid CJS export.');",
+        "const { Random } = require('@tsupc/random');",
+        "const random = new Random('seed');",
+        "if (typeof random.nextUint32() !== 'number') throw new Error('Invalid CJS export.');",
       ].join(" "),
     ]);
   });
@@ -86,8 +88,10 @@ describe("@tsupc/random packaging", () => {
       writeFileSync(
         path.join(fixtureDir, "index.ts"),
         [
-          "import * as test from '@tsupc/random';",
-          "void test;",
+          "import { Random } from '@tsupc/random';",
+          "const random = new Random('seed');",
+          "const value: number = random.nextUint32();",
+          "void value;",
         ].join("\n"),
       );
 
