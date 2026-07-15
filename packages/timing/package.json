@@ -1,10 +1,10 @@
 {
-  "name": "@tsupc/{{ package_name }}",
+  "name": "@tsupc/timing",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/{{ git_repo_uri_path }}.git",
-    "directory": "packages/{{ package_name }}"
-  },  
+    "url": "git+https://github.com/codicial/tsupc.git",
+    "directory": "packages/timing"
+  },
   "license": "MIT",
   "version": "0.0.1",
   "type": "module",
