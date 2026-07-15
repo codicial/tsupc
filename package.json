@@ -1,0 +1,34 @@
+{
+  "name": "tsupc",
+  "description": "TypeScript Utility Package Collection",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codicial/tsupc.git"
+  },
+  "license": "MIT",
+  "version": "0.0.0",
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "clean": "node ./scripts/clean-package.mjs && pnpm -r run clean",
+    "format": "oxfmt packages/ scripts/",
+    "create:package": "node ./scripts/create-package.mjs",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && node ./scripts/publish-packages.mjs"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.31.0",
+    "nunjucks": "3.2.4",
+    "oxfmt": "^0.59.0",
+    "tsdown": "^0.22.7",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}
