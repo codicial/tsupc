@@ -1,15 +1,25 @@
 import { execFileSync } from "node:child_process";
-import { mkdirSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 
+const repoRoot = process.cwd();
 const packagesDir = path.resolve("packages");
 const npmCacheDir = path.resolve(".tmp", ".npm-cache");
+const npmUserConfigPath = path.join(repoRoot, ".npmrc");
 const packageDirectories = readdirSync(packagesDir, { withFileTypes: true })
   .filter((entry) => entry.isDirectory())
   .map((entry) => path.join(packagesDir, entry.name))
   .sort();
 
 mkdirSync(npmCacheDir, { recursive: true });
+
+const npmEnv = {
+  ...process.env,
+  npm_config_cache: npmCacheDir,
+  ...(existsSync(npmUserConfigPath)
+    ? { NPM_CONFIG_USERCONFIG: process.env.NPM_CONFIG_USERCONFIG ?? npmUserConfigPath }
+    : {}),
+};
 
 const unpublishedPackages = [];
 
@@ -26,10 +36,7 @@ for (const packageDir of packageDirectories) {
   try {
     execFileSync("npm", ["view", spec, "version", "--json"], {
       cwd: packageDir,
-      env: {
-        ...process.env,
-        npm_config_cache: npmCacheDir,
-      },
+      env: npmEnv,
       stdio: "pipe",
     });
   } catch {
@@ -50,10 +57,7 @@ for (const pkg of unpublishedPackages) {
   console.log(`Publishing ${pkg.spec}`);
   execFileSync("npm", ["publish", "--access", pkg.access, "--provenance"], {
     cwd: pkg.dir,
-    env: {
-      ...process.env,
-      npm_config_cache: npmCacheDir,
-    },
+    env: npmEnv,
     stdio: "inherit",
   });
 }
