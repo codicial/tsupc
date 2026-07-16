@@ -32,6 +32,14 @@ writeFileSync(
 );
 
 writeFileSync(
+  path.join(packageRoot, "README.md"),
+  nunjucks.render(path.join(templatesFolder, "README.md.njk"), {
+    package_name: normalizedName,
+  }),
+  { flag: "wx" },
+);
+
+writeFileSync(
   path.join(packageRoot, "src", "index.ts"),
   nunjucks.render(path.join(templatesFolder, "index.ts.njk")),
   { flag: "wx" },
