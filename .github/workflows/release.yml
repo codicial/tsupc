@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    paths:
+      - .changeset/*.md
+      - .changeset/config.json
+      - packages/*/package.json
+      - packages/*/CHANGELOG.md
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
