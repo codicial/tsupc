@@ -25,7 +25,7 @@
     "release": "pnpm build && node ./scripts/publish-packages.mjs"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.31.0",
+    "@changesets/cli": "^2.31.1",
     "@types/node": "^26.1.1",
     "@vitest/coverage-v8": "^4.1.10",
     "nunjucks": "3.2.4",
