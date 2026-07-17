@@ -1,5 +1,11 @@
 # @tsupc/timing
 
+## 0.1.3
+
+### Patch Changes
+
+- 96140a7: Updated the debounce signature to be more flexible in strongly typed TypeScript projects.
+
 ## 0.1.2
 
 ### Patch Changes
