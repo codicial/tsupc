@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { Random } from "../src";
 
@@ -14,6 +14,25 @@ describe("Random", () => {
     expect(left.nextBigInt(0n, 10_000n)).toBe(right.nextBigInt(0n, 10_000n));
     expect(left.nextChoice(["a", "b", "c"])).toBe(right.nextChoice(["a", "b", "c"]));
     expect(left.nextShuffle([1, 2, 3, 4, 5])).toEqual(right.nextShuffle([1, 2, 3, 4, 5]));
+  });
+
+  it("normalizes explicit seeds and falls back to the current timestamp", () => {
+    const seeded = new Random(42n);
+    expect(seeded.getSeed()).toBe("42");
+
+    const now = vi.spyOn(Date, "now").mockReturnValue(1_725_000_000_000);
+
+    try {
+      const fallback = new Random();
+      expect(fallback.getSeed()).toBe("1725000000000");
+    } finally {
+      now.mockRestore();
+    }
+  });
+
+  it("hashes strings deterministically", () => {
+    expect(Random.hashString("seed")).toBe(Random.hashString("seed"));
+    expect(Random.hashString("seed")).not.toBe(Random.hashString("other-seed"));
   });
 
   it("returns values inside the expected scalar ranges", () => {
@@ -56,6 +75,26 @@ describe("Random", () => {
     );
     expect(() => random.nextBigInt(0n, (1n << 64n) + 1n)).toThrow(
       "Range for nextBigInt must be <= 2^64.",
+    );
+  });
+
+  it("supports nextNumber for both number and bigint ranges", () => {
+    const random = new Random("next-number");
+
+    const int = random.nextNumber(-5, 5);
+    expect(int).toBeGreaterThanOrEqual(-5);
+    expect(int).toBeLessThan(5);
+
+    const bigint = random.nextNumber(10n, 20n);
+    expect(bigint).toBeGreaterThanOrEqual(10n);
+    expect(bigint).toBeLessThan(20n);
+  });
+
+  it("rejects mixed argument types for nextNumber", () => {
+    const random = new Random("mixed-next-number");
+
+    expect(() => random.nextNumber(1 as number | bigint, 2n as number | bigint)).toThrow(
+      "nextNumber requires both arguments to be of the same type.",
     );
   });
 

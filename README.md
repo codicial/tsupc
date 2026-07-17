@@ -50,6 +50,7 @@ Run the workspace checks:
 ```sh
 pnpm typecheck
 pnpm test
+pnpm coverage
 pnpm build
 ```
 
@@ -64,6 +65,7 @@ pnpm clean
 - `pnpm build` - builds every package
 - `pnpm clean` - removes build output, temp files, and coverage artifacts
 - `pnpm create:package <name>` - scaffolds a new package in `packages/<name>`
+- `pnpm coverage` - runs package test suites with coverage reporting
 - `pnpm typecheck` - runs TypeScript checks across the workspace
 - `pnpm test` - runs package test suites
 - `pnpm changeset` - creates a new Changeset entry
@@ -87,6 +89,7 @@ packages/<name>/
   package.json
   tsconfig.json
   tsdown.config.ts
+  vitest.config.ts
 ```
 
 The scaffold is powered by Nunjucks templates in `scripts/templates/`.
@@ -161,7 +164,7 @@ The CI workflow in `.github/workflows/ci.yml` runs on pull requests and on `main
 
 - install
 - typecheck
-- test
+- test with coverage
 - build
 
 ## Project Layout

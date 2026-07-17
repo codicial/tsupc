@@ -8,13 +8,14 @@
   },
   "license": "MIT",
   "version": "0.0.0",
-  "packageManager": "pnpm@11.7.0",
+  "packageManager": "pnpm@11.11.0",
   "engines": {
     "node": ">=22.18.0"
   },
   "scripts": {
     "build": "pnpm -r build",
     "clean": "node ./scripts/clean-package.mjs && pnpm -r run clean",
+    "coverage": "pnpm -r coverage",
     "format": "oxfmt packages/ scripts/",
     "create:package": "node ./scripts/create-package.mjs",
     "typecheck": "pnpm -r typecheck",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.31.0",
     "@types/node": "^26.1.1",
+    "@vitest/coverage-v8": "^4.1.10",
     "nunjucks": "3.2.4",
     "oxfmt": "^0.59.0",
     "tsdown": "^0.22.7",

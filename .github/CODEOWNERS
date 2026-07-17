@@ -1,0 +1,11 @@
+# Default ownership for the repository.
+* @codicial
+
+# GitHub automation and repository configuration.
+/.github/ @codicial
+
+# Published packages.
+/packages/ @codicial
+
+# Shared package scaffolding and repo utilities.
+/scripts/ @codicial

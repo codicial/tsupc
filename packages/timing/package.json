@@ -29,6 +29,7 @@
   "scripts": {
     "build": "tsdown && node ../../scripts/sync-types.mjs",
     "clean": "node ../../scripts/clean-package.mjs",
+    "coverage": "pnpm run build && vitest run --coverage",
     "test": "pnpm run build && vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   }
