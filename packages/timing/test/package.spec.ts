@@ -85,7 +85,11 @@ describe("@tsupc/timing packaging", () => {
     try {
       writeFileSync(
         path.join(fixtureDir, "index.ts"),
-        ["import * as test from '@tsupc/timing';", "void test;"].join("\n"),
+        [
+          "import { debounce } from '@tsupc/timing';",
+          "const debounced = debounce((...args: unknown[]): void => {}, 25);",
+          "debounced('hello');",
+        ].join("\n"),
       );
 
       writeFileSync(

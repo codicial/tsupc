@@ -65,4 +65,10 @@ writeFileSync(
   { flag: "wx" },
 );
 
+writeFileSync(
+  path.join(packageRoot, "vitest.config.ts"),
+  nunjucks.render(path.join(templatesFolder, "vitest.config.ts.njk")),
+  { flag: "wx" },
+);
+
 console.log(`Created @tsupc/${normalizedName} at ${packageRoot}`);
