@@ -30,7 +30,7 @@
     "@vitest/coverage-v8": "^4.1.10",
     "nunjucks": "3.2.4",
     "oxfmt": "^0.59.0",
-    "tsdown": "^0.22.7",
+    "tsdown": "^0.22.9",
     "typescript": "^7.0.2",
     "vitest": "^4.1.10"
   }
