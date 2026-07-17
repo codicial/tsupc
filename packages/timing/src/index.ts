@@ -7,14 +7,17 @@
  * @param func - The function to invoke after the debounce delay.
  * @param delay - The debounce window in milliseconds.
  * @returns A wrapper function with the same parameter list as `func`.
+ *
+ * The returned wrapper always returns `void`, even if `func` returns a value,
+ * because invocation is deferred until the debounce delay elapses.
  */
-export function debounce<T extends (...args: unknown[]) => void>(
-  func: T,
+export function debounce<TArgs extends unknown[], TResult>(
+  func: (...args: TArgs) => TResult,
   delay: number,
-): (...args: Parameters<T>) => void {
+): (...args: TArgs) => void {
   let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
-  return function (...args: Parameters<T>): void {
+  return function (...args: TArgs): void {
     if (timeoutId) {
       clearTimeout(timeoutId);
     }
