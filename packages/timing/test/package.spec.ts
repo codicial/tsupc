@@ -87,7 +87,7 @@ describe("@tsupc/timing packaging", () => {
         path.join(fixtureDir, "index.ts"),
         [
           "import { debounce } from '@tsupc/timing';",
-          "const debounced = debounce((...args: unknown[]): void => {}, 25);",
+          "const debounced = debounce((value: string): number => value.length, 25);",
           "debounced('hello');",
         ].join("\n"),
       );
