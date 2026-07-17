@@ -28,7 +28,7 @@ describe("@tsupc/array packaging", () => {
       "--eval",
       [
         "import * as test from '@tsupc/array';",
-        "if (test === undefined) throw new Error('Invalid ESM export.');",
+        "if (typeof test.contains !== 'function') throw new Error('Invalid ESM export.');",
       ].join(" "),
     ]);
   });
@@ -38,7 +38,7 @@ describe("@tsupc/array packaging", () => {
       "--eval",
       [
         "const test = require('@tsupc/array');",
-        "if (test === undefined) throw new Error('Invalid CJS export.');",
+        "if (typeof test.contains !== 'function') throw new Error('Invalid CJS export.');",
       ].join(" "),
     ]);
   });
@@ -85,7 +85,11 @@ describe("@tsupc/array packaging", () => {
     try {
       writeFileSync(
         path.join(fixtureDir, "index.ts"),
-        ["import * as test from '@tsupc/array';", "void test;"].join("\n"),
+        [
+          "import { contains } from '@tsupc/array';",
+          "const hasValue = contains([1, 2, 3], 2);",
+          "void hasValue;",
+        ].join("\n"),
       );
 
       writeFileSync(

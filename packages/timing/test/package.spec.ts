@@ -28,7 +28,7 @@ describe("@tsupc/timing packaging", () => {
       "--eval",
       [
         "import * as test from '@tsupc/timing';",
-        "if (test === undefined) throw new Error('Invalid ESM export.');",
+        "if (typeof test.debounce !== 'function') throw new Error('Invalid ESM export.');",
       ].join(" "),
     ]);
   });
@@ -38,7 +38,7 @@ describe("@tsupc/timing packaging", () => {
       "--eval",
       [
         "const test = require('@tsupc/timing');",
-        "if (test === undefined) throw new Error('Invalid CJS export.');",
+        "if (typeof test.debounce !== 'function') throw new Error('Invalid CJS export.');",
       ].join(" "),
     ]);
   });

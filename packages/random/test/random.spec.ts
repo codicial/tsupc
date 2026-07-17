@@ -93,9 +93,10 @@ describe("Random", () => {
   it("rejects mixed argument types for nextNumber", () => {
     const random = new Random("mixed-next-number");
 
-    expect(() => random.nextNumber(1 as number | bigint, 2n as number | bigint)).toThrow(
-      "nextNumber requires both arguments to be of the same type.",
-    );
+    expect(() =>
+      // @ts-expect-error
+      random.nextNumber(1 as number | bigint, 2n as number | bigint),
+    ).toThrow("nextNumber requires both arguments to be of the same type.");
   });
 
   it("returns array members for nextChoice and throws on empty arrays", () => {
