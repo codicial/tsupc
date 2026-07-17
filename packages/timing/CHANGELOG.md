@@ -1,5 +1,11 @@
 # @tsupc/timing
 
+## 0.1.2
+
+### Patch Changes
+
+- c4fbafd: Added code coverage, a security policy, code owners, and a dependabot config for maintenance.
+
 ## 0.1.1
 
 ### Patch Changes
