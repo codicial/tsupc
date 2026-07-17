@@ -21,14 +21,14 @@ function run(command: string, args: string[], cwd = packageDir): string {
   });
 }
 
-describe("@tsupc/timing packaging", () => {
+describe("@tsupc/array packaging", () => {
   it("supports ESM self-imports", () => {
     run(process.execPath, [
       "--input-type=module",
       "--eval",
       [
-        "import * as test from '@tsupc/timing';",
-        "if (typeof test.debounce !== 'function') throw new Error('Invalid ESM export.');",
+        "import * as test from '@tsupc/array';",
+        "if (typeof test.contains !== 'function') throw new Error('Invalid ESM export.');",
       ].join(" "),
     ]);
   });
@@ -37,8 +37,8 @@ describe("@tsupc/timing packaging", () => {
     run(process.execPath, [
       "--eval",
       [
-        "const test = require('@tsupc/timing');",
-        "if (typeof test.debounce !== 'function') throw new Error('Invalid CJS export.');",
+        "const test = require('@tsupc/array');",
+        "if (typeof test.contains !== 'function') throw new Error('Invalid CJS export.');",
       ].join(" "),
     ]);
   });
@@ -86,9 +86,9 @@ describe("@tsupc/timing packaging", () => {
       writeFileSync(
         path.join(fixtureDir, "index.ts"),
         [
-          "import { debounce } from '@tsupc/timing';",
-          "const debounced = debounce((value: string): number => value.length, 25);",
-          "debounced('hello');",
+          "import { contains } from '@tsupc/array';",
+          "const hasValue = contains([1, 2, 3], 2);",
+          "void hasValue;",
         ].join("\n"),
       );
 
