@@ -35,6 +35,8 @@ importers:
 
   packages/array: {}
 
+  packages/predicate: {}
+
   packages/random: {}
 
   packages/timing: {}
